@@ -1,7 +1,7 @@
-import { Pool } from 'pg';
+import pg from 'pg';
 import "dotenv/config";
 
-const pool = new Pool({
+const pool = new pg.Pool({
   user: process.env.PGUSER,
   host: process.env.PGHOST,
   database: process.env.PGDATABASE,
@@ -30,18 +30,21 @@ async function storeFibonacciNumbers(n) {
   }
 }
 
-module.exports.postFibonacci = (req, res) => {
+export const postFibonacci = async (req, res) => {
   const n = parseInt(req.body.n);
-
+  console.log(req.body);
+  console.log(n);
   try {
     await storeFibonacciNumbers(n);
+
     res.sendStatus(200);
   } catch(error) {
+    console.log(error);
     res.status(500).send(error);
   }
 }
 
-module.exports.getFibonacci = (req, res) => {
+export const getFibonacci = async (req, res) => {
   const n = parseInt(req.params.n);
 
   try {
@@ -49,6 +52,7 @@ module.exports.getFibonacci = (req, res) => {
     const fibNumbers = result.rows.map((row) => row.value);
     res.status(200).send(fibNumbers);
   } catch(error) {
+    console.log(error);
     res.status(500).send(error);
   }
 }

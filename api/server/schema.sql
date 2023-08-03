@@ -7,8 +7,9 @@ DROP TABLE IF EXISTS Fibonacci;
 
 CREATE TABLE fibonacci (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  fibIndex INT NOT NULL,
-  fib_num TEXT NOT NULL
+  index INT NOT NULL,
+  value TEXT NOT NULL,
+  CONSTRAINT unique_value UNIQUE (index)
 );
 
-CREATE INDEX fib_id_index on fibonacci using HASH (fibIndex);
+CREATE INDEX fib_id_index on fibonacci using HASH (index);
