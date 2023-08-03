@@ -3,13 +3,12 @@ CREATE DATABASE FibonacciNumbers;
 
 \c fibonaccinumbers;
 
-DROP TABLE IF EXISTS Fibonacci CASCADE;
-
+DROP TABLE IF EXISTS Fibonacci;
 
 CREATE TABLE fibonacci (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  index INT NOT NULL,
-  fib_num TEXT NOT NULL,
-)
+  fibIndex INT NOT NULL,
+  fib_num TEXT NOT NULL
+);
 
--- CREATE INDEX fib_id_index on fibonacci using HASH (id);
+CREATE INDEX fib_id_index on fibonacci using HASH (fibIndex);
