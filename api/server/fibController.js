@@ -28,7 +28,7 @@ function calculateFibonacci(n) {
 async function storeFibonacciNumbers(n) {
   try {
     if (fibCache.has(n)) {
-      return;
+      return fibCache.get(n);
     }
 
     const existingNumbers = await pool.query(
